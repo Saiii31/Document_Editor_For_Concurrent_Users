@@ -89,4 +89,5 @@ def on_disconnect():
     print("User disconnected")
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    port = int(os.getenv("PORT", 5000))  # Use Railway's assigned PORT
+    socketio.run(app, host="0.0.0.0", port=port, debug=True)

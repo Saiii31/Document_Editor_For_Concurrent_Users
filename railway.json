@@ -1,0 +1,9 @@
+{
+  "build": {
+    "command": "npm install"
+  },
+  "deploy": {
+    "command": "python app.py"
+  },
+  "start": "python app.py"
+}

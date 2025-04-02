@@ -38,6 +38,10 @@
     <div id="alert-box">
         <p>Changes Saved!</p>
     </div>
-
+    <script>
+        const socket = io.connect(window.location.origin, {
+        transports: ['websocket']});
+    </script>
+    
 </body>
 </html>
