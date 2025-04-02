@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Editor</title>
+    <script src="https://cdn.socket.io/4.1.2/socket.io.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="{{ url_for('static', filename='script.js') }}"></script> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <div class="image" style="background:url(bg.jpg);"></div>
+    <div class="container">
+        <div>
+        <h1>Document Editor</h1>
+        <h3>Edit Document:</h3>
+        <form action="/edit" method="POST">
+            <label for="user_id">User ID:</label>
+            <input type="text" id="user_id" name="user_id" required><br><br>
+            <label for="changes">Changes:</label><br>
+            <textarea id="changes" name="changes" rows="4" cols="50" required></textarea><br><br>
+            <button type="submit">Save Changes</button>
+        </form>
+        </div>
+    </div>
+
+    <br><br>
+    <h3>Document Data:</h3>
+    <div id="document-content">
+        {% for key, value in document_data.items() %}
+        <p><strong>{{ key }}:</strong> {{ value }}</p>
+        {% endfor %}     
+    </div>
+
+    <!-- Alert Box -->
+    <div id="alert-box">
+        <p>Changes Saved!</p>
+    </div>
+
+</body>
+</html>
