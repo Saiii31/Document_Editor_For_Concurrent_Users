@@ -1,7 +1,8 @@
 flask
 redis
 flask-session
-flask-socketio
+Flask-SocketIO
+eventlet
 gevent
 gevent-websocket
 
