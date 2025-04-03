@@ -4,6 +4,7 @@ import redis
 import threading
 import json
 import config  # Import config.py
+import os
 
 app = Flask(__name__)
 
@@ -41,7 +42,6 @@ def index():
     document_data = redis_client.hgetall("document:123")
     return render_template('index.html', document_data=document_data)
 
-@app.route('/edit', methods=['POST'])
 @app.route('/edit', methods=['POST'])
 def edit_document():
     user_id = request.form['user_id']
@@ -89,5 +89,5 @@ def on_disconnect():
     print("User disconnected")
 
 if __name__ == '__main__':
-    port = int(os.getenv("PORT", 5000))  # Use Railway's assigned PORT
-    socketio.run(app, host="0.0.0.0", port=port, debug=True)
+    # port = int(os.getenv("PORT", 5001))  # Use Railway's assigned PORT
+    socketio.run(app, host="0.0.0.0", debug=True)
