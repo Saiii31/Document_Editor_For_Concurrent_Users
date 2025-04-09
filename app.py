@@ -4,6 +4,10 @@ import redis
 import threading
 import json
 import os
+import subprocess
+
+# Start subscriber.py in background
+subprocess.Popen(["python", "subscriber.py"])
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
