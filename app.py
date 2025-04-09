@@ -86,5 +86,5 @@ def on_disconnect():
     print("Client disconnected")
 
 if __name__ == '__main__':
-    port = int(os.getenv("PORT", 5001))
-    socketio.run(app, port=port, debug=True)
+    # port = int(os.getenv("PORT", 5001))
+   socketio.run(app, debug=True, port=8081)
