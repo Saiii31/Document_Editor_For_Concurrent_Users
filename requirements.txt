@@ -1,0 +1,8 @@
+flask
+redis
+flask-session
+Flask-SocketIO
+eventlet
+gevent
+gevent-websocket
+
