@@ -1,34 +1,33 @@
-/*  Global Styles */
+/* Global Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", "Inter", Arial, sans-serif;
     transition: all 0.3s ease-in-out;
-    
 }
-.image{
-        background: url('bg.jpg') no-repeat center center/cover;
-    filter: brightness(30%); /* Adjust brightness (0% - fully black, 100% - original) */
+
+/* Optional Background Image */
+.image {
+    background: url('bg.jpg') no-repeat center center/cover;
+    filter: brightness(30%);
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     z-index: -1;
-
 }
+
+/* Body Background and Layout */
 body {
-     background: linear-gradient(to right, #101010, #010101); /*Modern Gradient */
-    /* background: url('bg.jpg'); */
-    background-size: cover;
+    background: linear-gradient(to right, #101010, #010101);
     color: #fff;
     text-align: center;
     padding: 20px;
 }
 
-
-/*  Title */
+/* Header Title */
 h1 {
     font-size: 2.5rem;
     margin-bottom: 20px;
@@ -36,46 +35,46 @@ h1 {
     font-weight: bold;
     animation: fadeIn 1s ease-in-out;
 }
-/*  Container for the form */
-.container 
-{
+
+/* Container */
+.container {
     background: rgba(255, 255, 255, 0.1);
     padding: 30px;
     border-radius: 10px;
     max-width: 600px;
-    margin: 0 auto; /* Centers the container */
+    margin: 0 auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    
 }
 
-/*  Forms */
+/* Form Section */
+.form-section {
+    margin-top: 20px;
+}
+
 form {
-    background: transparent;
     padding: 20px 0;
-    max-width: 100%;
-    margin: 20px 0;
-   
 }
 
-/*  Form Labels */
 label {
+    display: block;
     font-size: 1.1rem;
     font-weight: 600;
+    margin: 10px 0 5px;
 }
 
-/*  Input Fields */
-input, textarea {
+input,
+textarea {
     width: 100%;
     padding: 10px;
-    margin-top: 8px;
     border: none;
     border-radius: 5px;
     font-size: 1rem;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.85);
     color: #333;
+    margin-bottom: 15px;
 }
 
-/*  Submit Button */
+/* Button Styles */
 button {
     background: #ff5733;
     color: white;
@@ -85,8 +84,6 @@ button {
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    display: inline-block;
-    margin-top: 10px;
     transition: 0.3s;
 }
 
@@ -95,13 +92,16 @@ button:hover {
     transform: scale(1.05);
 }
 
-/*  Document Data Display */
+/* Document Data Display */
+.document-section {
+    margin-top: 30px;
+}
+
 #document-content {
     background: rgba(255, 255, 255, 0.1);
     padding: 20px;
     border-radius: 10px;
-    margin: 20px auto;
-    max-width: 600px;
+    margin-top: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     animation: slideIn 1s ease-in-out;
 }
@@ -112,40 +112,35 @@ p {
     margin: 10px 0;
 }
 
-/*  Key Animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+/* Alert Box */
+#alert-box {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    max-width: 600px;
+    margin: 10px auto;
+    padding: 15px;
+    font-size: 1.2rem;
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    display: none;
 }
 
-@keyframes slideUp {
-    from { opacity: 0; transform: translateY(30px); }
+#alert-box p {
+    margin: 0;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideIn {
     from { opacity: 0; transform: translateX(-30px); }
     to { opacity: 1; transform: translateX(0); }
-}
-
-/*  Success Alert Styling */
-#alert-box {
-    position: fixed;
-    top: 20px; /* Position it at the top */
-    left: 50%;
-    transform: translateX(-50%); /* Center it horizontally */
-    z-index: 1000; /* Ensure it's above other content */
-    max-width: 600px; /* Limit width */
-    margin: 10px 0;
-    padding: 15px;
-    font-size: 1.2rem;
-    background-color: #d4edda; /* Bootstrap success color */
-    color: #155724;
-    border: 1px solid #c3e6cb;
-    border-radius: 5px;
-    display: none; /* Initially hidden */
-}
-
-#alert-box p {
-    margin: 0;
 }

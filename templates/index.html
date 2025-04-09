@@ -14,40 +14,41 @@
     <!-- Static CSS & JS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script defer src="{{ url_for('static', filename='script.js') }}"></script>
-    
 </head>
 <body>
-    <!-- Background Image -->
+
+    <!-- Optional Background Image -->
     <!-- <div class="image" style="background-image: url('{{ url_for('static', filename='bg.jpg') }}');"></div> -->
 
-    <!-- Main Editor UI -->
     <div class="container">
         <h1>Document Editor</h1>
 
-        <h3>Edit Document:</h3>
-        <form action="/edit" method="POST">
-            <label for="user_id">User ID:</label>
-            <input type="text" id="user_id" name="user_id" required><br><br>
+        <section class="form-section">
+            <h3>Edit Document:</h3>
+            <form action="/edit" method="POST">
+                <label for="user_id">User ID:</label>
+                <input type="text" id="user_id" name="user_id" required>
 
-            <label for="changes">Changes:</label><br>
-            <textarea id="changes" name="changes" rows="4" cols="50" required></textarea><br><br>
+                <label for="changes">Changes:</label>
+                <textarea id="changes" name="changes" rows="4" required></textarea>
 
-            <button type="submit">Save Changes</button>
-        </form>
+                <button type="submit">Save Changes</button>
+            </form>
+        </section>
 
-        <br><br>
-        <h3>Document Data:</h3>
-        <div id="document-content">
-            {% for key, value in document_data.items() %}
-                <p><strong>{{ key }}:</strong> {{ value }}</p>
-            {% endfor %}
-        </div>
+        <section class="document-section">
+            <h3>Document Data:</h3>
+            <div id="document-content">
+                {% for key, value in document_data.items() %}
+                    <p><strong>{{ key }}:</strong> {{ value }}</p>
+                {% endfor %}
+            </div>
+        </section>
     </div>
 
-    <!-- Alert Box -->
     <div id="alert-box"><p>Changes Saved!</p></div>
 
-    <!-- Socket.IO Script -->
+    <!-- Real-time Socket.IO -->
     <script>
         const socket = io();
 
@@ -57,8 +58,8 @@
 
         socket.on('document_update', (data) => {
             const update = typeof data === "string" ? JSON.parse(data) : data;
-
             const docDiv = document.getElementById("document-content");
+
             const para = document.createElement("p");
             para.innerHTML = `<strong>${update.user}:</strong> ${update.text}`;
             docDiv.appendChild(para);
