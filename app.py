@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, jsonify
-from flask_socketio import SocketIO, emit
 import redis
 import threading
 import json
@@ -11,7 +10,6 @@ subprocess.Popen(["python", "subscriber.py"])
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
-socketio = SocketIO(app, cors_allowed_origins="http://127.0.0.1:5001")
 
 # Redis configuration
 redis_client = redis.Redis(
@@ -31,10 +29,10 @@ def redis_subscriber():
         if message['type'] == 'message':
             try:
                 update_data = json.loads(message['data'])
-                print("Emitting update:", update_data)
-                socketio.emit('document_update', update_data)
+                print("Received update (but SocketIO disabled):", update_data)
+                # If needed: Store this in a DB, or log to file
             except Exception as e:
-                print("Error emitting update:", e)
+                print("Error reading update:", e)
 
 # Run Redis listener in background
 threading.Thread(target=redis_subscriber, daemon=True).start()
@@ -50,7 +48,6 @@ def edit_document():
     changes = request.form['changes']
 
     redis_client.hset("document:123", user_id, changes)
-
     update_data = {"user": user_id, "text": changes}
     redis_client.publish('document_updates', json.dumps(update_data))
 
@@ -66,7 +63,6 @@ def update_document():
         return jsonify({"error": "Invalid data"}), 400
 
     redis_client.hset("document:123", user_id, changes)
-
     update_data = {"user": user_id, "text": changes}
     redis_client.publish('document_updates', json.dumps(update_data))
 
@@ -77,14 +73,5 @@ def view_data():
     document_data = redis_client.hgetall("document:123")
     return jsonify(document_data)
 
-@socketio.on('connect')
-def on_connect():
-    print("Client connected")
-
-@socketio.on('disconnect')
-def on_disconnect():
-    print("Client disconnected")
-
 if __name__ == '__main__':
-    # port = int(os.getenv("PORT", 5001))
-   socketio.run(app, debug=True, port=8081)
+    app.run(host='0.0.0.0', debug=True, port=5000)
